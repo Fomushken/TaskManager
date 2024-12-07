@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Form for creating a new task -->
+    <div class="add-task-form">
+        <input type="text" id="task-title" placeholder="Task title" required />
+        <input type="datetime-local" id="task-due-date" required />
+        <input type="text" id="task-description" placeholder="Task description" required />
+        <button onclick="addTask()">Add task</button>
+    </div>
+
+    <ul id="task-list">
+    </ul>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        window.onload = fetchTasks;
+    </script>
+{% endblock %}
