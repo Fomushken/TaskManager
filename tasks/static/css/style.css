@@ -10,6 +10,8 @@ body, html {
 
 main {
     flex: 1;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 header {
@@ -17,6 +19,8 @@ header {
     color: white;
     padding: 10px 0;
     text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 header h1 {
@@ -44,6 +48,7 @@ footer {
     bottom: 0;
     left: 0;
     width: 100%;
+    box-sizing: border-box;
 }
 
 ul {
@@ -54,10 +59,21 @@ ul {
 .task {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px;
     background-color: #f9f9f9;
-    border-radius: 4px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
     margin-bottom: 10px;
+}
+
+.task.pending {
+    background-color: #ffeb3b;
+}
+
+.task.in_progress {
+    background-color: #03a9f4;
+    color: white;
 }
 
 .task button {
@@ -71,9 +87,15 @@ ul {
     color: darkred;
 }
 
-.task-completed {
+.task-completed, .task.completed {
     text-decoration: line-through;
+    background-color: #4caf50;
     color: #888;
+}
+
+.task.failed {
+    background-color: #f44336;
+    color: white;
 }
 
 .add-task-form input,
@@ -83,6 +105,7 @@ ul {
     width: 100%;
     border: 1px solid #ddd;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .add-task-form {

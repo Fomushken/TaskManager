@@ -60,14 +60,59 @@ function fetchTasks() {
             data.forEach(task => {
                 const li = document.createElement('li');
                 li.classList.add('task');
+                li.classList.add(task.status)
                 li.innerHTML = `
                 <span class="${task.status === 'completed' ? 'task-completed' : ''}">
                     ${task.title} - ${new Date(task.due_date).toLocaleString()}
                 </span>
-                <button onclick="removeTask(${task.id})"><i class="fas fa-trash-alt"></i></button>
+                <div>          
+                <button onclick="toggleTaskStatus(${task.id}, '${task.status}')">
+                    ${task.status === 'completed' ? 'Return for revision' : 'Change status'}
+                </button>
+                <button onclick="removeTask(${task.id})">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+                </div>
                 `;
                 taskList.appendChild(li);
             });
         })
         .catch(error => console.error("Error fetch tasks:", error));
+}
+
+function toggleTaskStatus(taskId, currentStatus) {
+    let newStatus;
+
+    switch (currentStatus) {
+        case 'pending':
+            newStatus = 'in_progress';
+            break;
+        case 'in_progress':
+            newStatus = 'completed';
+            break;
+        case 'completed':
+            newStatus = 'failed';
+            break;
+        case 'failed':
+            newStatus = 'pending';
+            break;
+        default:
+            console.error("Unknown status:", currentStatus);
+            return;
+    }
+
+    fetch(`/api/tasks/${taskId}/change_status/`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken(),
+        },
+        body: JSON.stringify({status: newStatus}),
+    })
+        .then(response => response.json())
+        .then(data => {
+            fetchTasks();
+            // showNotification("Task status updated!");
+        })
+        .catch(error => console.error('Error changing task status:', error));
 }
