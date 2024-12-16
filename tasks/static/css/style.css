@@ -44,7 +44,7 @@ footer {
     padding: 10px 0;
     margin-top: auto;
     font-size: 14px;
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -101,7 +101,7 @@ ul {
 .add-task-form input,
 .add-task-form button {
     padding: 10px;
-    margin: 5px;
+    margin-top: 5px;
     width: 100%;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -110,4 +110,20 @@ ul {
 
 .add-task-form {
     margin-bottom: 20px;
+}
+
+.sort-options-dropdown {
+    background: #f0f0f0 no-repeat right 10px center;
+    border: 1px solid #ccc;
+    padding: 5px 30px 5px 10px;
+    border-radius: 4px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    position: relative;
+    left: 60%;
+}
+
+.sort-options-dropdown:focus {
+    border-color: #5b9bd5;
 }
